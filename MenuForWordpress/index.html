@@ -1,0 +1,43 @@
+<!--            mobile test nav bar-->
+            <div id="mobile-nav">
+            <div id="ham" style="font-size:30px;cursor:pointer; display: inline-block; float: left;" >&#9776;</div>
+            
+            <div id="nav-drill" class="nav-drill">
+             <?php
+                wp_nav_menu( array( 
+                'theme_location' => 'my-custom-menu', 
+                'before'            => '<div class="nav-item">',
+                'after'            => '</div>',
+                'container_class' => 'custom-menu-class' ) );
+            ?>
+            </div>
+            </div>
+            
+<!--            Mobile nav Script-->
+            <script>
+                const navExpand = [].slice.call(document.querySelectorAll('.nav-drill ul li'))
+                const backLink = `<li class="nav-item">
+	       <a class="nav-link nav-back-link" href="javascript:;">
+		Back
+	       </a>
+            </li>`
+
+
+navExpand.forEach(item => {
+    if(item.querySelector('.sub-menu') != null){
+        item.querySelector('.sub-menu').insertAdjacentHTML('afterbegin', backLink)
+        item.querySelector('.nav-back-link').addEventListener('click', () => item.classList.remove('active'))
+    }
+    
+	item.querySelector('.nav-item a').addEventListener('click', () => item.classList.add('active'))
+    
+    
+})            
+   
+            const ham = document.getElementById('ham')
+            ham.addEventListener('click', function() {
+	        document.body.classList.toggle('nav-is-toggled')
+            })
+                
+            </script>
+            
